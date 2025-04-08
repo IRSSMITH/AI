@@ -93,6 +93,7 @@
 
   <script>
     const chatBox = document.getElementById('chat-box');
+    const inputField = document.getElementById('user-input');
 
     function addMessage(content, sender) {
       const msg = document.createElement('div');
@@ -103,12 +104,11 @@
     }
 
     async function sendMessage() {
-      const input = document.getElementById('user-input');
-      const userText = input.value.trim();
+      const userText = inputField.value.trim();
       if (!userText) return;
 
       addMessage(userText, 'user');
-      input.value = '';
+      inputField.value = '';
 
       try {
         const res = await fetch('https://ai-1myg.onrender.com/chat', {
@@ -124,6 +124,13 @@
         console.error(error);
       }
     }
+
+    // ✨ NEW: Send message on Enter key press
+    inputField.addEventListener('keydown', function (event) {
+      if (event.key === 'Enter') {
+        sendMessage();
+      }
+    });
   </script>
 
 </body>
