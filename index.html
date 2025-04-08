@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Assistant</title>
+</head>
+<body>
+  <h1>Ask Your AI Assistant</h1>
+  <input type="text" id="question" placeholder="Ask me anything...">
+  <button onclick="askQuestion()">Ask</button>
+
+  <h2>Answer:</h2>
+  <p id="response"></p>
+
+  <script>
+    async function askQuestion() {
+      const question = document.getElementById("question").value;
+      const responseElement = document.getElementById("response");
+
+      // Make an API request to your backend (Flask or FastAPI)
+      const response = await fetch('http://your-render-url.com/ask', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ question: question }),
+      });
+
+      const data = await response.json();
+      responseElement.textContent = data.answer;  // Display the answer from the backend
+    }
+  </script>
+</body>
+</html>
