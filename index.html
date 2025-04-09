@@ -114,7 +114,8 @@
         const res = await fetch('https://ai-1myg.onrender.com/chat', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ message: userText })
+          body: JSON.stringify({ message: userText }),
+          mode: 'cors'  // 👈 THIS IS THE NEW BIT
         });
 
         const data = await res.json();
@@ -125,7 +126,6 @@
       }
     }
 
-    // ✨ NEW: Send message on Enter key press
     inputField.addEventListener('keydown', function (event) {
       if (event.key === 'Enter') {
         sendMessage();
